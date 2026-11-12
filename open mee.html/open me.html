@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="mk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Биди мојата Валентина!</title>
+    <style>
+        /* Основни стилови за мобилен */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #fce4ec;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden; /* Спречува скролање кога бега копчето */
+            touch-action: manipulation;
+        }
+
+        .container {
+            background: white;
+            padding: 30px 20px;
+            border-radius: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            width: 85%; /* Responsive ширина */
+            max-width: 350px;
+            text-align: center;
+            position: relative;
+        }
+
+        img {
+            width: 150px;
+            height: auto;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            color: #d81b60;
+            font-size: 22px;
+            margin-bottom: 30px;
+            line-height: 1.4;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            height: 50px; /* Фиксна висина за контејнерот на копчињата */
+        }
+
+        button {
+            padding: 12px 25px;
+            font-size: 18px;
+            font-weight: bold;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+            z-index: 10;
+        }
+
+        #yesBtn {
+            background-color: #ff4081;
+            color: white;
+        }
+
+        #noBtn {
+            background-color: #bdbdbd;
+            color: white;
+            position: absolute; /* Ова овозможува бегање низ цел екран */
+        }
+
+        .success-content {
+            display: none;
+        }
+
+        .success-content img {
+            width: 100%;
+            border-radius: 15px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container" id="mainContainer">
+        <div id="askSection">
+            <img src="download (1).jfif" alt="Cute owl">
+            <h1>Дали ме сакаш? ❤️</h1>
+            <div class="buttons">
+                <button id="yesBtn" onclick="showSuccess()">Да</button>
+                <button id="noBtn">Не</button>
+            </div>
+        </div>
+
+        <div id="successSection" class="success-content">
+            <img src="download.jfif" alt="Celebration">
+            <h1>Јеее Сања евреја :) </h1>
+        </div>
+    </div>
+
+    <script>
+        const noBtn = document.getElementById('noBtn');
+
+        // Функција за преместување на копчето
+        function moveButton() {
+            // Пресметуваме случајна позиција која не излегува од екранот
+            const padding = 20;
+            const x = Math.random() * (window.innerWidth - noBtn.offsetWidth - padding * 2) + padding;
+            const y = Math.random() * (window.innerHeight - noBtn.offsetHeight - padding * 2) + padding;
+            
+            noBtn.style.position = 'fixed';
+            noBtn.style.left = x + 'px';
+            noBtn.style.top = y + 'px';
+        }
+
+        // Работи на компјутер (mouse over)
+        noBtn.addEventListener('mouseover', moveButton);
+        
+        // Работи на телефон (допир)
+        noBtn.addEventListener('touchstart', function(e) {
+            e.preventDefault(); // Спречува кликање
+            moveButton();
+        });
+
+        function showSuccess() {
+            document.getElementById('askSection').style.display = 'none';
+            document.getElementById('successSection').style.display = 'block';
+            
+            // Мал бонус: Кога ќе кликне ДА, копчето НЕ нека исчезне целосно
+            noBtn.style.display = 'none';
+        }
+    </script>
+
+</body>
+</html>
